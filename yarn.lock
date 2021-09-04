@@ -487,6 +487,19 @@
     "@vuepress/core" "2.0.0-beta.25"
     prismjs "^1.24.1"
 
+"@vuepress/plugin-search@^2.0.0-beta.25":
+  version "2.0.0-beta.25"
+  resolved "https://registry.nlark.com/@vuepress/plugin-search/download/@vuepress/plugin-search-2.0.0-beta.25.tgz#9c222d6ff5ed21e0ceecf3f0d230f3c806205388"
+  integrity sha1-nCItb/XtIeDO7PPw0jDzyAYgU4g=
+  dependencies:
+    "@vuepress/client" "2.0.0-beta.25"
+    "@vuepress/core" "2.0.0-beta.25"
+    "@vuepress/shared" "2.0.0-beta.25"
+    "@vuepress/utils" "2.0.0-beta.25"
+    chokidar "^3.5.2"
+    vue "^3.2.3"
+    vue-router "^4.0.10"
+
 "@vuepress/plugin-theme-data@2.0.0-beta.25":
   version "2.0.0-beta.25"
   resolved "http://mirrors.cloud.tencent.com/npm/@vuepress%2fplugin-theme-data/-/plugin-theme-data-2.0.0-beta.25.tgz#3475f38bc7e4b62646fa03ee31c25357e57ea1fb"

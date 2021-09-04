@@ -5,7 +5,7 @@ heroText: Shiro
 tagline: 基于 OneBot 协议的 QQ机器人 快速开发框架
 actions:
   - text: 快速开始 →
-    link: /guide/
+    link: /quickstart/
     type: primary
 features:
   - title: 简洁至上
