@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Shiro Docs',
   description: 'Shiro Docs',
-  base: '/',
+  base: '/shiro-docs/',
   plugins: [['@vuepress/plugin-search']],
   themeConfig: {
     repo: 'MisakaTAT/Shiro',
