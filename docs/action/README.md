@@ -63,6 +63,32 @@ sendGroupForwardMsg(long groupId, JSONArray msg)
 | `groupId` | long          | 群号                          |
 | `messages` | forward node[] | 自定义转发消息, 具体看 [CQcode](https://docs.go-cqhttp.org/cqcode/#%E5%90%88%E5%B9%B6%E8%BD%AC%E5%8F%91%E6%B6%88%E6%81%AF%E8%8A%82%E7%82%B9) |
 
+
+## 获取消息
+
+**方法**
+
+```java
+getMsg(int msgId)
+```
+
+**参数**
+
+| 字段         | 类型  | 说明   |
+| ------------ | ----- | ------ |
+| `msgId` | int | 消息id |
+
+**响应数据**
+
+| 字段          | 类型     | 说明       |
+| ------------ | -------- | ---------- |
+| `messageId` | int     | 消息id     |
+| `realId`    | int     | 消息真实id  |
+| `sender`     | object | 发送者     |
+| `time`       | int    | 发送时间    |
+| `message`    | string | 消息内容    |
+| `rawMessage`| string  | 原始消息内容 |
+
 ## 撤回消息
 
 **方法**
