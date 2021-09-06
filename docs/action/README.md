@@ -60,7 +60,7 @@ sendGroupForwardMsg(long groupId, JSONArray msg)
 
 | 字段       | 类型           | 说明                          |
 | ---------- | -------------- | ----------------------------- |
-| `groupId` | int64          | 群号                          |
+| `groupId` | long          | 群号                          |
 | `messages` | forward node[] | 自定义转发消息, 具体看 [CQcode](https://docs.go-cqhttp.org/cqcode/#%E5%90%88%E5%B9%B6%E8%BD%AC%E5%8F%91%E6%B6%88%E6%81%AF%E8%8A%82%E7%82%B9) |
 
 ## 撤回消息
@@ -304,7 +304,7 @@ getStrangerInfo(long userId, boolean noCache)
 
 | 字段名 | 数据类型 | 默认值 | 说明 |
 | ----- | ------- | ----- | --- |
-| `userId` | int64 | - | QQ 号 |
+| `userId` | long | - | QQ 号 |
 | `noCache` | boolean | `false` | 是否不使用缓存（使用缓存可能更新不及时, 但响应更快） |
 
 ## 获取好友列表
@@ -325,7 +325,7 @@ getFriendList()
 
 | 字段名 | 数据类型 | 说明 |
 | ----- | ------- | --- |
-| `userId` | int64 | QQ 号 |
+| `userId` | long | QQ 号 |
 | `nickname` | string | 昵称 |
 | `remark` | string | 备注名 |
 
@@ -341,7 +341,7 @@ deleteFriend(long friendId)
 
 | 字段名 | 数据类型 | 默认值 | 说明 |
 | ----- | ------- | ----- | --- |
-| `friendId` | int64 | - | 好友 QQ 号 |
+| `friendId` | long | - | 好友 QQ 号 |
 
 ::: tip 提示
 该 API 无响应数据
@@ -359,7 +359,7 @@ getGroupInfo(long groupId, boolean noCache)
 
 | 字段名 | 数据类型 | 默认值 | 说明 |
 | ----- | ------- | ----- | --- |
-| `groupId` | int64 | - | 群号 |
+| `groupId` | long | - | 群号 |
 | `noCache` | boolean | `false` | 是否不使用缓存（使用缓存可能更新不及时, 但响应更快） |
 
 **响应数据**
@@ -370,13 +370,13 @@ getGroupInfo(long groupId, boolean noCache)
 
 | 字段名 | 数据类型 | 说明 |
 | ----- | ------- | --- |
-| `group_id` | int64 | 群号 |
+| `group_id` | long | 群号 |
 | `group_name` | string | 群名称 |
 | `group_memo` | string | 群备注 |
-| `group_create_time` | uint32 | 群创建时间 |
-| `group_level` | uint32 | 群等级 |
-| `member_count` | int32 | 成员数 |
-| `max_member_count` | int32 | 最大成员数（群容量） |
+| `group_create_time` | int | 群创建时间 |
+| `group_level` | int | 群等级 |
+| `member_count` | int | 成员数 |
+| `max_member_count` | int | 最大成员数（群容量） |
 
 ## 获取群列表
 
@@ -405,28 +405,28 @@ getGroupMemberInfo(long groupId, long userId, boolean noCache)
 
 | 字段名 | 数据类型 | 默认值 | 说明 |
 | ----- | ------- | ----- | --- |
-| `groupId` | int64 | - | 群号 |
-| `userId`  | int64 | - | QQ 号 |
+| `groupId` | long | - | 群号 |
+| `userId`  | long | - | QQ 号 |
 | `noCache` | boolean | `false` | 是否不使用缓存（使用缓存可能更新不及时, 但响应更快） |
 
 **响应数据**
 
 | 字段名 | 数据类型 | 说明 |
 | ----- | ------- | --- |
-| `groupId` | int64 | 群号 |
-| `userId` | int64 | QQ 号 |
+| `groupId` | long | 群号 |
+| `userId` | long | QQ 号 |
 | `nickname` | string | 昵称 |
 | `card` | string | 群名片／备注 |
 | `sex` | string | 性别, `male` 或 `female` 或 `unknown` |
-| `age` | int32 | 年龄 |
+| `age` | int | 年龄 |
 | `area` | string | 地区 |
-| `joinTime` | int32 | 加群时间戳 |
-| `lastSentTime` | int32 | 最后发言时间戳 |
+| `joinTime` | int | 加群时间戳 |
+| `lastSentTime` | int | 最后发言时间戳 |
 | `level` | string | 成员等级 |
 | `role` | string | 角色, `owner` 或 `admin` 或 `member` |
 | `unfriendly` | boolean | 是否不良记录成员 |
 | `title` | string | 专属头衔 |
-| `titleExpireTime` | int64 | 专属头衔过期时间戳 |
+| `titleExpireTime` | long | 专属头衔过期时间戳 |
 | `cardChangeable` | boolean | 是否允许修改群名片 |
 
 
@@ -443,7 +443,7 @@ getGroupMemberList(long groupId)
 
 | 字段名 | 数据类型 | 默认值 | 说明 |
 | ----- | ------- | ----- | --- |
-| `groupId` | int64 | - | 群号 |
+| `groupId` | long | - | 群号 |
 
 **响应数据**
 
@@ -461,14 +461,14 @@ getGroupHonorInfo(long groupId, String type)
 
 | 字段名 | 数据类型 | 默认值 | 说明 |
 | ----- | ------- | ----- | --- |
-| `groupId` | int64 | - | 群号 |
+| `groupId` | long | - | 群号 |
 | `type` | string | - | 要获取的群荣誉类型, 可传入 `talkative` `performer` `legend` `strong_newbie` `emotion` 以分别获取单个类型的群荣誉数据, 或传入 `all` 获取所有数据 |
 
 **响应数据**
 
 | 字段名 | 数据类型 | 说明 |
 | ----- | ------- | --- |
-| `groupId` | int64 | 群号 |
+| `groupId` | long | 群号 |
 | `currentTalkative` | object | 当前龙王, 仅 `type` 为 `talkative` 或 `all` 时有数据 |
 | `talkativeList` | array | 历史龙王, 仅 `type` 为 `talkative` 或 `all` 时有数据 |
 | `performerList` | array | 群聊之火, 仅 `type` 为 `performer` 或 `all` 时有数据 |
@@ -480,16 +480,16 @@ getGroupHonorInfo(long groupId, String type)
 
 | 字段名 | 数据类型 | 说明 |
 | ----- | ------- | --- |
-| `userId` | int64 | QQ 号 |
+| `userId` | long | QQ 号 |
 | `nickname` | string | 昵称 |
 | `avatar` | string | 头像 URL |
-| `dayCount` | int32 | 持续天数 |
+| `dayCount` | int | 持续天数 |
 
 其它各 `*_list` 的每个元素是一个 json 对象, 内容如下：
 
 | 字段名 | 数据类型 | 说明 |
 | ----- | ------- | --- |
-| `userId` | int64 | QQ 号 |
+| `userId` | long | QQ 号 |
 | `nickname` | string | 昵称 |
 | `avatar` | string | 头像 URL |
 | `description` | string | 荣誉描述 |
@@ -542,7 +542,7 @@ setGroupPortrait(long groupId, String file, int cache)
 
 | 字段       | 类型   | 说明                     |
 | ---------- | ------ | ------------------------ |
-| `groupId` | int64  | 群号                     |
+| `groupId` | long  | 群号                     |
 | `file`     | string | 图片文件名               |
 | `cache`    | int    | 表示是否使用已缓存的文件 |
 
@@ -588,7 +588,7 @@ sendGroupNotice(long groupId, String content)
 
 | 字段名      | 数据类型  | 默认值 | 说明    |
 | ---------- | ------- | ----- | ------ |
-| `groupId  ` | int64   |       | 群号    |
+| `groupId  ` | long   |       | 群号    |
 | `content`  | string  |       | 公告内容 |
 
 ::: tip 提示
@@ -607,15 +607,15 @@ getGroupAtAllRemain(long groupId)
 
 | 字段       | 类型   | 说明                      |
 | ---------- | ------ | ------------------------- |
-| `groupId` | int64  | 群号                      |
+| `groupId` | long  | 群号                      |
 
 **响应数据**
 
 | 字段                             | 类型       | 说明                            |
 | ------------------------------- | ---------- | ------------------------------- |
-| `canAtAll`                    | bool       | 是否可以 @全体成员               |
-| `remainAtAllCountForGroup` | int16      | 群内所有管理当天剩余 @全体成员 次数 |
-| `remainAtAllCountForUin`   | int16      | Bot 当天剩余 @全体成员 次数      |
+| `canAtAll`                    | boolean       | 是否可以 @全体成员               |
+| `remainAtAllCountForGroup` | int      | 群内所有管理当天剩余 @全体成员 次数 |
+| `remainAtAllCountForUin`   | int      | Bot 当天剩余 @全体成员 次数      |
 
 ## 上传群文件
 
@@ -633,7 +633,7 @@ uploadGroupFile(long groupId, String file, String name, String folder)
 
 | 字段       | 类型   | 说明                      |
 | ---------- | ------ | ------------------------- |
-| `groupId` | int64  | 群号                      |
+| `groupId` | long  | 群号                      |
 | `file`     | string |  本地文件路径       |
 | `name`     | string | 储存名称         |
 | `folder`   | string | 父目录ID           |
@@ -660,7 +660,7 @@ setGroupAnonymousBan(long groupId, String flag, boolean duration)
 
 | 字段名 | 数据类型 | 默认值 | 说明 |
 | ----- | ------- | ----- | --- |
-| `groupId` | int64 | - | 群号 |
+| `groupId` | long | - | 群号 |
 | `anonymous` | object | - | 可选, 要禁言的匿名用户对象（群消息上报的 `anonymous` 字段） |
 | `anonymous_flag` 或 `flag` | string | - | 可选, 要禁言的匿名用户的 flag（需从群消息上报的数据中获得） |
 | `duration` | number | `30 * 60` | 禁言时长, 单位秒, 无法取消匿名用户禁言 |
@@ -690,7 +690,7 @@ downloadFile(String url, int threadCount, String headers)
 | 字段       | 类型   | 说明                      |
 | ---------- | ------ | ------------------------- |
 | `url` | string  | 链接地址                      |
-| `threadCount` | int32  | 下载线程数            |
+| `threadCount` | int  | 下载线程数            |
 | `headers` | string or array  | 自定义请求头    |
 
 **`headers`格式:**
