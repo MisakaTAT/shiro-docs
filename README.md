@@ -2,14 +2,14 @@
 
 此仓库为 [MisakaTAT/Shiro](https://github.com/MisakaTAT/Shiro) 的文档。
 
-文档目前正在更新, 你可以在
+该文档目前正在更新, 你可以在下面找到预览页。
+
 - <https://misakatat.github.io/shiro-docs/> (预览)
 
-查看。
 
 ## 完善文档
 
-如果如果你对于这个文档有好的建议或者补充, 欢迎提 pull request 。
+如果你对该文档有好的建议或者补充, 欢迎 pr。
 
 ```shell
 git clone https://github.com/MisakaTAT/shiro-docs
