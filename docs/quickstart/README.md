@@ -14,6 +14,14 @@
 </dependency>
 ```
 
+### 从 Gradle 引入
+::: warning 注意
+请访问 [Maven Repo](https://search.maven.org/search?q=com.mikuac.shiro) 查看最新版本，并替换 `latest version`
+:::
+```
+implementation 'com.mikuac:shiro:latest version'
+```
+
 ### 从 Release 下载 jar 包
 从 [Release](https://github.com/MisakaTAT/Shiro/releases) 界面下载最新版本的 Shiro
 
