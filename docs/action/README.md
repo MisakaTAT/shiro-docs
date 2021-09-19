@@ -1,5 +1,6 @@
 # Action
 
+## 序
 ::: warning 提示
 Action 所有的方法均由 `com.mikuac.shiro.core.Bot` 类提供
 :::
