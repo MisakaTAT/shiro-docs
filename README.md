@@ -9,7 +9,7 @@
 
 ## 完善文档
 
-如果你对该文档有好的建议或者补充, 欢迎 PR
+如果你对该文档有好的建议或者补充, 欢迎 PR。
 
 ```shell
 git clone https://github.com/MisakaTAT/shiro-docs
