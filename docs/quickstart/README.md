@@ -47,19 +47,18 @@ shiro:
 server:
   port: 5000
 shiro:
+  # 插件列表 (顺序执行，如果前一个插件返回了MESSAGE_BLOCK，将不会执行后续插件)
+  # 注解方式无需在此定义插件
+  plugin-list:
+    - com.mikuac.example.plugins.PluginOne
+    - com.mikuac.example.plugins.PluginTwo
+  # WebSocket 配置
   ws-config:
     # 反向 Webscoket 连接地址，无需该配置字段可删除，将使用默认值 "/ws/shiro"
     ws-url: "/ws/shiro"
     # 访问密钥，强烈推荐在公网的服务器设置
     access-token: ""
     # 插件列表
-  plugin-list:
-    - com.mikuac.example.plugins.PluginOne
-    - com.mikuac.example.plugins.PluginTwo
-  # WebSocket 配置
-  ws-config:
-    # WebSocket 地址
-    ws-url: "/ws/shiro"
     # 超时回收，默认10秒
     do-request-timeout: 100000
     # 二进制消息的最大长度
@@ -90,7 +89,26 @@ shiro:
 
 ## 示例插件
 
-### 基础示例
+支持 String 消息转换为 Array 消息 ( v1.1.7 及以上版本 )
+```java
+@Component
+public class ExamplePlugin extends BotPlugin {
+    
+    @Override
+    public int onPrivateMessage(@NotNull Bot bot, @NotNull PrivateMessageEvent event) {
+        event.getArrayMsg().stream().filter(it ->
+                "image".equals(it.getType())
+        ).forEach(it ->
+                System.out.println(it.getData().get("url"))
+        );
+        return MESSAGE_IGNORE;
+    }
+    
+}
+```
+
+示例插件I：重写父类方法（需要在 application.yml 文件 plugin-list 定义插件）
+
 ```java
 // 继承BotPlugin开始编写插件
 @Component
@@ -126,6 +144,38 @@ public class ExamplePlugin extends BotPlugin {
         }
         // 返回 MESSAGE_IGNORE 插件向下执行，返回 MESSAGE_BLOCK 则不执行下一个插件
         return MESSAGE_IGNORE;
+    }
+
+}
+```
+
+示例插件II：注解调用
+
+```java
+@Component
+public class DemoPlugin extends BotPlugin {
+
+    // 符合 cmd 正则表达式的消息会被响应
+    @PrivateMessageHandler(cmd = "hi")
+    public void fun1(@NotNull Bot bot, @NotNull PrivateMessageEvent event, @NotNull Matcher matcher) {
+        // 构建消息
+        MsgUtils msgUtils = MsgUtils.builder().face(66).text("Hello, this is shiro demo.");
+        // 发送私聊消息
+        bot.sendPrivateMsg(event.getUserId(), msgUtils.build(), false);
+    }
+
+    // at 如果参数设定为 AtEnum.NEED 则只有 at 了机器人的消息会被响应，若参数为 NOT_NEED，消息内如果 at 机器人则会忽略此消息
+    @GroupMessageHandler(cmd = "hi", at = AtEnum.OFF)
+    public void fun2(@NotNull GroupMessageEvent event) {
+        // 以注解方式调用可以根据自己的需要来为方法设定参数
+        // 例如群组消息可以传递 GroupMessageEvent event, Bot bot, Matcher matcher 多余的参数会被设定为 null
+        System.out.println(event.getMessage());
+    }
+
+    // 同时监听群组及私聊消息 并根据消息类型（私聊，群聊）回复
+    @MessageHandler
+    public void fun3(@NotNull Bot bot, @NotNull WholeMessageEvent event) {
+        bot.sendMsg(event, "hello", false);
     }
 
 }
