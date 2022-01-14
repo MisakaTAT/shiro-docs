@@ -22,9 +22,6 @@
 implementation 'com.mikuac:shiro:latest version'
 ```
 
-### 从 Release 下载 jar 包
-从 [Release](https://github.com/MisakaTAT/Shiro/releases) 界面下载最新版本的 Shiro
-
 ## 配置文件
 将项目的 `application.properties` 修改为 `resources/application.yml` 
 
@@ -36,7 +33,8 @@ server:
   port: 5000
 # Shiro 配置
 shiro:
-  # 插件列表
+  # 插件列表 (顺序执行，如果前一个插件返回了MESSAGE_BLOCK，将不会执行后续插件)
+  # 注解方式无需在此定义插件
   plugin-list: 
     - com.mikuac.example.plugins.PluginOne
     - com.mikuac.example.plugins.PluginTwo
@@ -71,6 +69,9 @@ shiro:
   limiter:
     # 是否启用限速器
     enable: false
+     # acquire 如果令牌获取失败，将会阻塞当前线程直到获取成功（后面的 action 将会等待处理，不会被丢弃）
+     # tryAcquire 如果令牌获取失败，该 action 将被丢弃
+    mode: "acquire"
     # 每秒生成的令牌数
     permits-per-second: 1
   # 线程池配置
@@ -107,8 +108,38 @@ public class ExamplePlugin extends BotPlugin {
 }
 ```
 
-示例插件I：重写父类方法（需要在 application.yml 文件 plugin-list 定义插件）
+示例插件I：注解调用
+```java
+@Component
+public class DemoPlugin extends BotPlugin {
 
+    // 符合 cmd 正则表达式的消息会被响应
+    @PrivateMessageHandler(cmd = "hi")
+    public void fun1(@NotNull Bot bot, @NotNull PrivateMessageEvent event, @NotNull Matcher matcher) {
+        // 构建消息
+        MsgUtils msgUtils = MsgUtils.builder().face(66).text("Hello, this is shiro demo.");
+        // 发送私聊消息
+        bot.sendPrivateMsg(event.getUserId(), msgUtils.build(), false);
+    }
+
+    // at 如果参数设定为 AtEnum.NEED 则只有 at 了机器人的消息会被响应，若参数为 NOT_NEED，消息内如果 at 机器人则会忽略此消息
+    @GroupMessageHandler(cmd = "hi", at = AtEnum.OFF)
+    public void fun2(@NotNull GroupMessageEvent event) {
+        // 以注解方式调用可以根据自己的需要来为方法设定参数
+        // 例如群组消息可以传递 GroupMessageEvent event, Bot bot, Matcher matcher 多余的参数会被设定为 null
+        System.out.println(event.getMessage());
+    }
+
+    // 同时监听群组及私聊消息 并根据消息类型（私聊，群聊）回复
+    @MessageHandler
+    public void fun3(@NotNull Bot bot, @NotNull WholeMessageEvent event) {
+        bot.sendMsg(event, "hello", false);
+    }
+
+}
+```
+
+示例插件II：重写父类方法（需要在 application.yml 文件 plugin-list 定义插件）
 ```java
 // 继承BotPlugin开始编写插件
 @Component
@@ -144,38 +175,6 @@ public class ExamplePlugin extends BotPlugin {
         }
         // 返回 MESSAGE_IGNORE 插件向下执行，返回 MESSAGE_BLOCK 则不执行下一个插件
         return MESSAGE_IGNORE;
-    }
-
-}
-```
-
-示例插件II：注解调用
-
-```java
-@Component
-public class DemoPlugin extends BotPlugin {
-
-    // 符合 cmd 正则表达式的消息会被响应
-    @PrivateMessageHandler(cmd = "hi")
-    public void fun1(@NotNull Bot bot, @NotNull PrivateMessageEvent event, @NotNull Matcher matcher) {
-        // 构建消息
-        MsgUtils msgUtils = MsgUtils.builder().face(66).text("Hello, this is shiro demo.");
-        // 发送私聊消息
-        bot.sendPrivateMsg(event.getUserId(), msgUtils.build(), false);
-    }
-
-    // at 如果参数设定为 AtEnum.NEED 则只有 at 了机器人的消息会被响应，若参数为 NOT_NEED，消息内如果 at 机器人则会忽略此消息
-    @GroupMessageHandler(cmd = "hi", at = AtEnum.OFF)
-    public void fun2(@NotNull GroupMessageEvent event) {
-        // 以注解方式调用可以根据自己的需要来为方法设定参数
-        // 例如群组消息可以传递 GroupMessageEvent event, Bot bot, Matcher matcher 多余的参数会被设定为 null
-        System.out.println(event.getMessage());
-    }
-
-    // 同时监听群组及私聊消息 并根据消息类型（私聊，群聊）回复
-    @MessageHandler
-    public void fun3(@NotNull Bot bot, @NotNull WholeMessageEvent event) {
-        bot.sendMsg(event, "hello", false);
     }
 
 }
