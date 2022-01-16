@@ -4,7 +4,7 @@
 
 该文档目前正在更新, 你可以在下面找到预览页。
 
-- <https://misakatat.github.io/shiro-docs/> (预览)
+- <https://misakatat.github.io/shiro-docs> (预览)
 
 
 ## 完善文档

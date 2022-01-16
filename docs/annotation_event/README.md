@@ -7,6 +7,9 @@
 ```yaml
 server:
   port: 5000
+shiro:
+  # 反向 Websocket 连接地址，无需该配置字段可删除，将使用默认值 "/ws/shiro"
+  # ws-url: "/ws/shiro"
 ```
 
 ::: warning 注意

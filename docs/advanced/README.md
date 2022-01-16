@@ -138,7 +138,7 @@ shiro:
     - com.mikuac.example.plugins.PluginTwo
   # WebSocket 配置
   ws-config:
-    # 反向 Webscoket 连接地址，无需该配置字段可删除，将使用默认值 "/ws/shiro"
+    # 反向 Websocket 连接地址，无需该配置字段可删除，将使用默认值 "/ws/shiro"
     ws-url: "/ws/shiro"
     # 访问密钥，强烈推荐在公网的服务器设置
     access-token: ""

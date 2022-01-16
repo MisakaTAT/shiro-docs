@@ -9,6 +9,8 @@ server:
   port: 5000
 # Shiro 配置
 shiro:
+  # 反向 Websocket 连接地址，无需该配置字段可删除，将使用默认值 "/ws/shiro"
+  # ws-url: "/ws/shiro"
   # 插件列表（顺序执行 如果前一个插件返回了 MESSAGE_BLOCK 将不会执行后续插件）
   # 注解方式无需在此定义插件
   plugin-list: 
