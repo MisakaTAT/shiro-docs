@@ -187,12 +187,12 @@ public @interface GroupAdminHandler {
 ### 好友添加事件
 ```java
 @FriendAddHandler
-public void fun(Bot bot, FriendAddNoticeEvent event) {}
+public void fun(Bot bot, FriendAddNoticeHandler event) {}
 ```
 
 ```java
 @Documented
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FriendAddHandler {}
+public @interface FriendAddNoticeHandler {}
 ```
