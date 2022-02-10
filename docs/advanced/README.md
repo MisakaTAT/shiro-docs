@@ -13,6 +13,11 @@ MsgUtils msgUtils = MsgUtils.builder()
 
 ## 内置工具类
 
+### QQ号获取昵称
+```java
+ShiroUtils.getNickname(12345678L)
+```
+
 ### 判断是否为全体 @
 ```java
 ShiroUtils.isAtAll(String msg)
