@@ -196,3 +196,29 @@ public void fun(Bot bot, FriendAddNoticeHandler event) {}
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FriendAddNoticeHandler {}
 ```
+
+### 群消息撤回事件
+```java
+@GroupMsgDeleteNoticeHandler
+public void fun(Bot bot, GroupMsgDeleteNoticeEvent event) {}
+```
+
+```java
+@Documented
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface GroupMsgDeleteNoticeHandler {}
+```
+
+### 私聊消息撤回事件
+```java
+@PrivateMsgDeleteNoticeHandler
+public void fun(Bot bot, PrivateMsgDeleteNoticeEvent event) {}
+```
+
+```java
+@Documented
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface PrivateMsgDeleteNoticeHandler {}
+```
