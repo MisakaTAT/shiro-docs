@@ -160,11 +160,15 @@ shiro:
   limiter:
     # 是否启用限速器
     enable: false
-     # acquire 如果令牌获取失败，将会阻塞当前线程直到获取成功（后面的 action 将会等待处理，不会被丢弃）
-     # tryAcquire 如果令牌获取失败，该 action 将被丢弃
-    mode: "acquire"
-    # 每秒生成的令牌数
-    permits-per-second: 1
+    # 补充速率（每秒补充的令牌数量）
+    rate: 1
+    # 令牌桶容量
+    capacity: 1
+     # 如果该值为 true 时，当令牌获取失败则会阻塞当前线程，后续任务将被添加到等待队列。
+     # 如果该值为 false 时，当令牌获取失败则会直接丢次本次请求。
+    awaitTask: true
+    # 等待超时
+    timeout: 10
   # 线程池配置
   task-pool:
     # 核心线程数（默认线程数）
