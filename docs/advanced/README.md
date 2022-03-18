@@ -141,6 +141,9 @@ shiro:
   plugin-list:
     - com.mikuac.example.plugins.PluginOne
     - com.mikuac.example.plugins.PluginTwo
+  # 拦截器
+  interceptor:
+    - com.mikuac.example.interceptor.Test
   # WebSocket 配置
   ws-config:
     # 反向 Websocket 连接地址，无需该配置字段可删除，将使用默认值 "/ws/shiro"
