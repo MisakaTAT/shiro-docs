@@ -57,6 +57,8 @@ implementation 'com.mikuac:shiro:latest'
 
 ::: tip 提示
 以下配置文件为最小实例
+
+更多配置项见 [进阶配置](advanced.html#进阶配置文件)
 :::
 
 ```yaml

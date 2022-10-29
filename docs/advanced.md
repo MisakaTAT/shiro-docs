@@ -1,9 +1,5 @@
 # 进阶
 
-::: danger 警告
-文档施工中···
-:::
-
 ## Matcher
 
 ::: warning 注意
@@ -55,9 +51,11 @@ public class ExamplePlugin {
 
 ## 消息构建工具
 
-> `MsgUtils` 主要的用途是为了能够便捷的构建包含多种类型的组合消息
+:::tip 提示
+`MsgUtils` 主要的用途是为了能够便捷的构建包含多种类型的组合消息
 
-> 更多类型请见 `com.mikuac.shiro.common.utils.MsgUtils`
+更多类型请见 `com.mikuac.shiro.common.utils.MsgUtils`
+:::
 
 ```java
 String msg = MsgUtils.builder()
@@ -108,4 +106,150 @@ public class ExamplePlugin extends BotPlugin {
     }
 
 }
+```
+
+## 辅助工具类
+
+
+:::tip 提示
+以下方法均由 `com.mikuac.shiro.common.utils.ShiroUtils` 提供
+
+详细用法见方法 `ShiroUtils` 注释
+:::
+
+- **現在公開可能な情報（已支持的方法列表）**
+    - 消息编码 `escape()`
+    - 消息解码 `unescape()`
+    - 获取用户昵称 `getNickname`
+    - 判断是否为全体@ `isAtAll()`
+    - 获取群头像 `getGroupAvatar()`
+    - 获取用户头像 `getUserAvatar()`
+    - 获取消息内所有图片链接 `getMsgImgUrlList()`
+    - 获取消息内所有视频链接 `getMsgVideoUrlList()`
+    - String消息上报转消息链 `stringToMsgChain()`
+    - 创建自定义消息合并转发 `generateForwardMsg()`
+    - 从 MsgChainBean 生成 CQ Code `jsonToCode()`
+    - 消息编码（转义CQ码防止文本注入） `escape2()`
+    - 获取消息内所有@成员账号（不包含全体@） `getAtList()`
+
+## 合并转发
+
+```java
+// 构建消息列表（可以填充 MsgUtils 构建的消息）
+List<String> msgList = new ArrayList<String>() {{
+    msgList.add("这是第一条消息");
+    msgList.add("这是第二条消息");
+    msgList.add("这是第三条消息");
+}};
+
+// 构建合并转发消息（selfId为合并转发消息显示的账号，nickname为显示的发送者昵称，msgList为消息列表）
+List<Map<String, Object>> forwardMsg = ShiroUtils.generateForwardMsg(selfId, nickname, msgList)
+
+// 发送合并转发内容到群（groupId为要发送的群）
+bot.sendGroupForwardMsg(groupId, forwardMsg)
+
+// 发送合并转发内容到私聊（userId为要发送的好友账号）
+bot.sendPrivateForwardMsg(userId, forwardMsg)
+```
+
+## OneBotMedia
+
+- 支持的参数
+    - file
+    - cache
+    - proxy
+    - timeout
+
+```java
+// 该示例构建了一条图片消息，并且告诉客户端不要使用缓存
+OneBotMedia img = new OneBotMedia.Builder().file("https://example.com/1.jpg").cache(false).build();
+// 构建消息
+String msg = MsgUtils.builder().img(img).build();
+```
+
+## 拦截器
+
+>配置文件指定拦截器实例
+
+```yaml
+shiro:
+  interceptor: com.mikuac.example.interceptor.InterceptorExample
+```
+
+```java
+@Component
+public class InterceptorExample implements BotMessageEventInterceptor {
+
+    @Override
+    public boolean preHandle(Bot bot, MessageEvent event) throws Exception {
+        // 预处理方法，可以在触发事件前做一些处理，返回值为 false 时本次事件将会被拦截
+        // 使用场景可以是黑名单检查或检查权限等等，具体的使用场景可以发挥自己的想象力
+        // MessageEvent 可能为右边这三种类型 PrivateMessageEvent、GroupMessageEvent、GuildMessageEvent
+        return false;
+    }
+
+    @Override
+    public void afterCompletion(Bot bot, MessageEvent event) throws Exception {
+        // 当 preHandle 返回值为 true 时则会进入到 afterCompletion
+    }
+
+}
+```
+
+## 进阶配置文件
+
+:::tip 提示
+以下配置文件为进阶配置，如有遗漏欢迎补充
+
+`ws-config` `task-pool` 大多数情况下保持默认即可
+:::
+
+```yaml
+shiro:
+  # 注解方式编写的插件无需在插件列表（plugin-list）定义
+  # 插件列表为顺序执行，如果前一个插件返回了 MESSAGE_BLOCK 将不会执行后续插件
+  plugin-list:
+    - com.mikuac.example.plugins.PluginOne
+    - com.mikuac.example.plugins.PluginTwo
+  # 拦截器
+  interceptor: com.mikuac.example.interceptor.InterceptorExample
+  # WebSocket 配置
+  ws-config:
+    # 反向 Websocket 连接地址，无需该配置字段可删除，将使用默认值 "/ws/shiro"
+    ws-url: "/ws/shiro"
+    # 访问密钥，强烈推荐在公网的服务器设置
+    access-token: ""
+    # 超时回收，默认10秒
+    do-request-timeout: 100000
+    # 二进制消息的最大长度
+    max-binary-message-buffer-size: 512000
+    # 最大空闲时间，超过这个时间将关闭会话
+    max-session-idle-timeout: 900000
+    # 最大文本消息缓冲区
+    max-text-message-buffer-size: 512000
+  # 限速器（令牌桶算法）
+  limiter:
+    # 是否启用限速器
+    enable: false
+    # 补充速率（每秒补充的令牌数量）
+    rate: 1
+    # 令牌桶容量
+    capacity: 1
+     # 如果该值为 false 时，当令牌获取失败则会直接丢次本次请求
+     # 如果该值为 true 时，当令牌获取失败则会阻塞当前线程，后续任务将被添加到等待队列
+    awaitTask: true
+    # 等待超时
+    timeout: 10
+  # 线程池配置
+  task-pool:
+    # 核心线程数（默认线程数）
+    core-pool-size: 10
+    # 缓冲队列大小
+    queue-capacity: 200
+    # 允许线程空闲时间（单位：默认为秒）
+    keep-alive-time: 10
+    # 最大线程数
+    max-pool-size: 30
+    # 线程池名前缀
+    thread-name-prefix: "ShiroTaskPool-"
 ```

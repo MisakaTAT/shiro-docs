@@ -24,7 +24,7 @@ export default {
     outline: [2, 6],
 
     socialLinks: [
-      { icon: "github", link: "https://github.com/MisakaTAT/shiro-docs" },
+      { icon: "github", link: "https://github.com/MisakaTAT/Shiro" },
     ],
 
     footer: {
