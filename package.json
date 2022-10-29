@@ -1,15 +1,16 @@
 {
   "name": "shiro-docs",
   "version": "1.0.0",
-  "main": "index.js",
+  "scripts": {
+    "dev": "vitepress dev .",
+    "build": "vitepress build .",
+    "serve": "vitepress serve ."
+  },
+  "repository": "git@github.com:MisakaTAT/shiro-docs.git",
   "author": "MisakaTAT <i@mikuac.com>",
   "license": "MIT",
   "devDependencies": {
-    "@vuepress/plugin-search": "^2.0.0-beta.25",
-    "vuepress": "^2.0.0-beta.25"
-  },
-  "scripts": {
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "vitepress": "1.0.0-alpha.26",
+    "vue": "3.2.33"
   }
 }

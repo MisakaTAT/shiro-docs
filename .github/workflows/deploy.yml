@@ -16,11 +16,11 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          yarn install
-          yarn run docs:build
+          yarn
+          yarn build
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: docs/.vuepress/dist
+          FOLDER: .vitepress/dist
