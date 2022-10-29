@@ -1,8 +1,10 @@
 export default {
   lang: "zh-CN",
   title: "Shiro SDK Document",
+  description: 'Shiro SDK Document',
 
   lastUpdated: true,
+  base: '/shiro-docs/',
 
   themeConfig: {
     nav: [
