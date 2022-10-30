@@ -190,7 +190,7 @@ public class InterceptorExample implements BotMessageEventInterceptor {
 
     @Override
     public void afterCompletion(Bot bot, MessageEvent event) throws Exception {
-        // 当 preHandle 返回值为 true 时则会进入到 afterCompletion
+        // 当 preHandle 返回值为 true 时则会执行 plugin-list，执行完毕后进入到 afterCompletion
     }
 
 }
