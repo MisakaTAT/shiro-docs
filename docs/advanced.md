@@ -198,10 +198,14 @@ public class InterceptorExample implements BotMessageEventInterceptor {
 
 ## CoreEvent
 
+::: warning 注意
+`CoreEvent` 仅在 `Shiro v1.3.9` 及以上版本提供
+:::
+
 ```java
 @Primary
 @Component
-public class CustomEvent extends CoreEvent {
+public class MyCoreEvent extends CoreEvent {
 
     @Override
     public void online(@NotNull Bot bot) {
