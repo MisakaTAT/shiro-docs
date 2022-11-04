@@ -232,6 +232,49 @@ public class MyCoreEvent extends CoreEvent {
 }
 ```
 
+## 自定义请求
+
+::: tip 提示
+当客户端提供了某些 `Action` 请求，但是 `Shiro` 尚未支持时，可以发起自定义请求，以下代码为对 `go-cqhttp` 的 `删除好友` 动作的示范
+:::
+
+>自定义一个枚举类型并实现 `ActionPath`
+
+```java
+@Getter
+public enum CustomActionPath implements ActionPath {
+
+    // 定义 Endpoint
+    DELETE_FRIEND("delete_friend");
+
+    private final String path;
+
+    CustomActionPath(String path) {
+        this.path = path;
+    }
+
+    @Override
+    public String getPath() {
+        return this.path;
+    }
+
+}
+```
+>发起请求
+
+```java
+// 定义需要删除的好友账号
+val friend = 12345678L;
+// 获取 Endpoint
+val action = CustomActionPath.DELETE_FRIEND;
+// 构建请求参数
+val params = new JSONObject() {{
+    put("friend_id", friend);
+}};
+// 参考 Bot 类对响应结果进行处理
+val result = bot.customRequest(action, params);
+```
+
 ## 进阶配置文件
 
 :::tip 提示
