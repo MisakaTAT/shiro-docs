@@ -65,6 +65,17 @@ String msg = MsgUtils.builder()
         .build();                       // 构建消息
 ```
 
+>媒体文件发送
+
+```java
+MsgUtils.builder()
+        .img("file:///C:/img/1.png")    // Windows 本地图片
+        .img("file:///root/1.png")      // Linux   本地图片
+        .img("base64://")               // Base64
+        .img("https://test.com/1.png")  // 网络图片
+        .build();    
+```
+
 ## 主动发送消息
 
 >在定时任务或者某些需要主动发送消息的场景下可以通过以下方式取出 Bot 对象
@@ -162,7 +173,7 @@ bot.sendPrivateForwardMsg(userId, forwardMsg)
 
 ```java
 // 该示例构建了一条图片消息，并且告诉客户端不要使用缓存
-OneBotMedia img = new OneBotMedia.Builder().file("https://example.com/1.jpg").cache(false).build();
+OneBotMedia img = OneBotMedia.builder().file("https://example.com/1.jpg").cache(false);
 // 构建消息
 String msg = MsgUtils.builder().img(img).build();
 ```
