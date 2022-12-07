@@ -4,7 +4,38 @@
 文档施工中···
 :::
 
+## 收到群聊或私聊消息
+### 重写
+```java
+public int onAnyMessage(@NotNull Bot bot, @NotNull AnyMessageEvent event) {
+    // do something···
+    return MESSAGE_IGNORE;
+}
+```
+### 注解
+```java
+@MessageHandler
+public void test(@NotNull Bot bot, @NotNull AnyMessageEvent event, @NotNull Matcher matcher){
+    // do something···
+}
+```
+
 ## 收到私聊消息
+### 重写
+```java
+public int onPrivateMessage(@NotNull Bot bot, @NotNull PrivateMessageEvent event) {
+    // do something···
+    return MESSAGE_IGNORE;
+}
+```
+### 注解
+```java
+@GroupMessageHandler
+public void test(@NotNull Bot bot, @NotNull PrivateMessageEvent event, @NotNull Matcher matcher){
+    // do something···
+}
+```
+
 ## 收到群聊消息
 ## 收到频道消息
 ## 群文件上传事件
