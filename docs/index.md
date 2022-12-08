@@ -93,7 +93,7 @@ servers:
 
 ## 第一个插件
 
-### 注解方式
+### 注解事件
 
 ```java
 @Shiro
@@ -126,7 +126,7 @@ public class ExamplePlugin {
 }
 ```
 
-### 重写方式
+### 重写事件
 
 ::: tip 提示
 - 注解方式编写的插件无需在插件列表（plugin-list）定义
