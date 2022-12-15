@@ -343,3 +343,23 @@ shiro:
     # 线程池名前缀
     thread-name-prefix: "ShiroTaskPool-"
 ```
+
+## 注解事件排序
+
+::: warning 注意
+`@Order` 注解仅在 `Shiro v1.4.2` 及以上版本提供
+:::
+
+```java
+@Order(1)
+@GroupMessageHandler
+public void test1(@NotNull Bot bot, @NotNull GroupMessageEvent event, @NotNull Matcher matcher) {
+    System.out.println("我将被第一个触发");
+}
+
+@Order(2)
+@GroupMessageHandler
+public void test2(@NotNull Bot bot, @NotNull GroupMessageEvent event, @NotNull Matcher matcher) {
+    System.out.println("我将被第二个触发");
+}
+```
