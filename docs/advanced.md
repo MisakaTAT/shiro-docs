@@ -98,11 +98,14 @@ private void sendMsg() {
 ## 消息链
 
 ::: warning 注意
-此参数仅在 `Shiro v1.1.7` 及以上版本提供
+`此参数（ArrayMsg）` 在 `Shiro v1.1.7` 及以上版本提供
+
+`类型枚举（MsgTypeEnum）` 在 `Shiro v1.4.5` 及以上版本提供
+
+参数取值后续有时间会考虑优化
 :::
 
->以下示例为过滤出本次消息中的收到的所有图片并打印图片的链接，更多类型可以打印 `event.getArrayMsg()` 自行查看，后续考虑加上类型枚举，欢迎PR
-
+>以下示例为过滤出本次消息中的收到的所有图片并打印图片的链接
 ```java
 @Component
 public class ExamplePlugin extends BotPlugin {
@@ -111,7 +114,7 @@ public class ExamplePlugin extends BotPlugin {
     public int onPrivateMessage(@NotNull Bot bot, @NotNull PrivateMessageEvent event) {
         event.getArrayMsg()
                 .stream()
-                .filter(type -> "image".equals(type.getType()))
+                .filter(item -> MsgTypeEnum.IMAGE == item.getType())
                 .forEach(image -> System.out.println(image.getData().get("url")));
         return MESSAGE_IGNORE;
     }
