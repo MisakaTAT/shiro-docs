@@ -1,17 +1,16 @@
 export default {
   lang: "zh-CN",
   title: "Shiro SDK Document",
-  description: 'Shiro SDK Document',
+  description: "Shiro SDK Document",
 
   lastUpdated: true,
-  base: '/shiro-docs/',
+  base: "/shiro-docs/",
 
   themeConfig: {
-    
     algolia: {
-      appId: 'X3KZS61WIZ',
-      apiKey: 'de397420c51f5bba13f3976820e656b6',
-      indexName: 'shiro-docs'
+      appId: "X3KZS61WIZ",
+      apiKey: "de397420c51f5bba13f3976820e656b6",
+      indexName: "shiro-docs",
     },
 
     nav: [
@@ -19,6 +18,7 @@ export default {
       { text: "Action", link: "/action.md" },
       { text: "Event", link: "/event.md" },
       { text: "Advanced", link: "/advanced.md" },
+      { text: "Types", link: "/types.md" },
     ],
 
     editLink: {

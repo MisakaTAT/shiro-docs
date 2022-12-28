@@ -3,15 +3,17 @@
 ## 基础信息
 
 ::: tip 提示
+
 - 本文档默认您了解并熟悉 **Java/Kotlin** 基本语法以及 **SpringBoot** 开发体系
-- QQ群：860346522
-:::
+- QQ 群：860346522
+  :::
 
 ::: warning 注意
+
 - 开发环境仅支持 `JDK 1.8` 及以上版本
-- 客户端需要支持 `websocket reverse` 即反向websocket连接
+- 客户端需要支持 `websocket reverse` 即反向 `websocket` 连接
 - 支持 `Onebot V11` 标准及 `go-cqhttp` 拓展
-:::
+  :::
 
 ## 项目创建
 
@@ -118,7 +120,7 @@ public class ExamplePlugin {
     }
 
     // 同时监听群组及私聊消息 并根据消息类型（私聊，群聊）回复
-    @MessageHandler
+    @AnyMessageHandler
     public void fun3(@NotNull Bot bot, @NotNull AnyMessageEvent event) {
         bot.sendMsg(event, "hello", false);
     }
@@ -129,14 +131,15 @@ public class ExamplePlugin {
 ### 重写事件
 
 ::: tip 提示
+
 - 注解方式编写的插件无需在插件列表（plugin-list）定义
 - 服务端配置文件 `resources/application.yaml` 追加如下内容
 - 插件列表为顺序执行，如果前一个插件返回了 `MESSAGE_BLOCK` 将不会执行后续插件
-:::
+  :::
 
 ```yaml
 shiro:
-  plugin-list: 
+  plugin-list:
     - com.example.bot.plugins.ExamplePlugin
 ```
 

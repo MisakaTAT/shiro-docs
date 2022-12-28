@@ -17,9 +17,8 @@
 
 此时只有匹配的消息内容可以触发此插件
 
-通过 `matcher.group(1)` 则可以取出 `MisakaTAT` 这个游戏ID
+通过 `matcher.group(1)` 则可以取出 `MisakaTAT` 这个游戏 ID
 :::
-
 
 ```java
 @Shiro
@@ -65,7 +64,7 @@ String msg = MsgUtils.builder()
         .build();                       // 构建消息
 ```
 
->媒体文件发送
+> 媒体文件发送
 
 ```java
 MsgUtils.builder()
@@ -73,12 +72,12 @@ MsgUtils.builder()
         .img("file:///root/1.png")      // Linux   本地图片
         .img("base64://")               // Base64
         .img("https://test.com/1.png")  // 网络图片
-        .build();    
+        .build();
 ```
 
 ## 主动发送消息
 
->在定时任务或者某些需要主动发送消息的场景下可以通过以下方式取出 Bot 对象
+> 在定时任务或者某些需要主动发送消息的场景下可以通过以下方式取出 Bot 对象
 
 ```java
 // 注入 Bot 容器
@@ -105,7 +104,8 @@ private void sendMsg() {
 参数取值后续有时间会考虑优化
 :::
 
->以下示例为过滤出本次消息中的收到的所有图片并打印图片的链接
+> 以下示例为过滤出本次消息中的收到的所有图片并打印图片的链接
+
 ```java
 @Component
 public class ExamplePlugin extends BotPlugin {
@@ -124,7 +124,6 @@ public class ExamplePlugin extends BotPlugin {
 
 ## 辅助工具类
 
-
 :::tip 提示
 以下方法均由 `com.mikuac.shiro.common.utils.ShiroUtils` 提供
 
@@ -132,19 +131,19 @@ public class ExamplePlugin extends BotPlugin {
 :::
 
 - **現在公開可能な情報（已支持的方法列表）**
-    - 消息编码 `escape()`
-    - 消息解码 `unescape()`
-    - 获取用户昵称 `getNickname`
-    - 判断是否为全体@ `isAtAll()`
-    - 获取群头像 `getGroupAvatar()`
-    - 获取用户头像 `getUserAvatar()`
-    - 获取消息内所有图片链接 `getMsgImgUrlList()`
-    - 获取消息内所有视频链接 `getMsgVideoUrlList()`
-    - String消息上报转消息链 `stringToMsgChain()`
-    - 创建自定义消息合并转发 `generateForwardMsg()`
-    - 从 MsgChainBean 生成 CQ Code `jsonToCode()`
-    - 消息编码（转义CQ码防止文本注入） `escape2()`
-    - 获取消息内所有@成员账号（不包含全体@） `getAtList()`
+  - 消息编码 `escape()`
+  - 消息解码 `unescape()`
+  - 获取用户昵称 `getNickname`
+  - 判断是否为全体@ `isAtAll()`
+  - 获取群头像 `getGroupAvatar()`
+  - 获取用户头像 `getUserAvatar()`
+  - 获取消息内所有图片链接 `getMsgImgUrlList()`
+  - 获取消息内所有视频链接 `getMsgVideoUrlList()`
+  - String 消息上报转消息链 `stringToMsgChain()`
+  - 创建自定义消息合并转发 `generateForwardMsg()`
+  - 从 MsgChainBean 生成 CQ Code `jsonToCode()`
+  - 消息编码（转义 CQ 码防止文本注入） `escape2()`
+  - 获取消息内所有@成员账号（不包含全体@） `getAtList()`
 
 ## 合并转发
 
@@ -169,10 +168,10 @@ bot.sendPrivateForwardMsg(userId, forwardMsg)
 ## OneBotMedia
 
 - 支持的参数
-    - file
-    - cache
-    - proxy
-    - timeout
+  - file
+  - cache
+  - proxy
+  - timeout
 
 ```java
 // 该示例构建了一条图片消息，并且告诉客户端不要使用缓存
@@ -183,7 +182,7 @@ String msg = MsgUtils.builder().img(img).build();
 
 ## 拦截器
 
->配置文件指定拦截器实例
+> 配置文件指定拦截器实例
 
 ```yaml
 shiro:
@@ -252,7 +251,7 @@ public class MyCoreEvent extends CoreEvent {
 当客户端提供了某些 `Action` 请求，但是 `Shiro` 尚未支持时，可以发起自定义请求，以下代码为对 `go-cqhttp` 的 `删除好友` 动作的示范
 :::
 
->自定义一个枚举类型并实现 `ActionPath`
+> 自定义一个枚举类型并实现 `ActionPath`
 
 ```java
 @Getter
@@ -274,7 +273,8 @@ public enum CustomActionPath implements ActionPath {
 
 }
 ```
->发起请求
+
+> 发起请求
 
 ```java
 // 定义需要删除的好友账号
@@ -327,9 +327,10 @@ shiro:
     # 补充速率（每秒补充的令牌数量）
     rate: 1
     # 令牌桶容量
-    capacity: 1
-     # 如果该值为 false 时，当令牌获取失败则会直接丢次本次请求
-     # 如果该值为 true 时，当令牌获取失败则会阻塞当前线程，后续任务将被添加到等待队列
+    capacity:
+      1
+      # 如果该值为 false 时，当令牌获取失败则会直接丢次本次请求
+      # 如果该值为 true 时，当令牌获取失败则会阻塞当前线程，后续任务将被添加到等待队列
     awaitTask: true
     # 等待超时
     timeout: 10
