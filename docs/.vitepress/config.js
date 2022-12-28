@@ -26,7 +26,7 @@ export default {
       text: "在 GitHub 上编辑此页",
     },
     lastUpdatedText: "上次更新",
-    outlineTitle: "本页目录",
+    outlineTitle: "索引",
 
     outline: [2, 6],
 
