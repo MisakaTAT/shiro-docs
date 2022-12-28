@@ -1,0 +1,20 @@
+.vp-doc th,
+.vp-doc td {
+  border: 1px solid rgb(255 255 255 / 0%);
+}
+
+.vp-doc h2 {
+  margin: 20px 0 16px;
+}
+
+.custom-block.tip code {
+  background-color: rgba(66, 184, 131, 0.2);
+}
+
+.custom-block.warning code {
+  background-color: rgba(255, 197, 23, 0.2);
+}
+
+.custom-block.danger code {
+  background-color: rgba(237, 60, 80, 0.2);
+}
