@@ -14,7 +14,7 @@
 
 | 参数       | 类型            | 描述                                       |
 | ---------- | :-------------- | ------------------------------------------ |
-| event      | AnyMessageEvent | 监听事件                                   |
+| event      | AnyMessageEvent | 事件                                       |
 | msg        | String          | 要发送的内容                               |
 | autoEscape | boolean         | 消息内容是否作为纯文本发送（不解析 CQ 码） |
 
@@ -40,7 +40,7 @@
 | ---------- | :-------------------------- | ------------ |
 | messageId  | int                         | 消息 ID      |
 | realId     | boolean                     | 消息真实 ID  |
-| sender     | [Sender](types.html#Sender) | 发送者信息   |
+| sender     | [Sender](types.html#sender) | 发送者信息   |
 | time       | int                         | 发送时间     |
 | message    | String                      | 消息内容     |
 | rawMessage | String                      | 原始消息内容 |
@@ -282,7 +282,7 @@
 
 | 字段     | 类型                                              | 描述         |
 | -------- | :------------------------------------------------ | ------------ |
-| 直接返回 | List<[FriendInfoResp](types.html#FriendInfoResp)> | 好友信息列表 |
+| 直接返回 | List<[FriendInfoResp](types.html#friendinforesp)> | 好友信息列表 |
 
 ## 删除好友
 
@@ -313,19 +313,68 @@
 
 | 字段     | 类型                                            | 描述       |
 | -------- | :---------------------------------------------- | ---------- |
-| 直接返回 | List<[GroupInfoResp](types.html#GroupInfoResp)> | 群信息列表 |
+| 直接返回 | List<[GroupInfoResp](types.html#groupinforesp)> | 群信息列表 |
 
 ## 获取群成员信息
 
 > bot.getGroupMemberInfo()
 
+**参数**
+
+| 参数    | 类型    | 描述         |
+| ------- | :------ | ------------ |
+| groupId | long    | 群号         |
+| userId  | long    | 目标用户     |
+| noCache | boolean | 是否禁用缓存 |
+
+**返回值**
+
+| 字段     | 类型                                                  | 描述     |
+| -------- | :---------------------------------------------------- | -------- |
+| 直接返回 | [GroupMemberInfoResp](types.html#groupmemberinforesp) | 成员信息 |
+
 ## 获取群成员列表
 
 > bot.getGroupMemberList()
 
+**参数**
+
+| 参数    | 类型 | 描述 |
+| ------- | :--- | ---- |
+| groupId | long | 群号 |
+
+**返回值**
+
+| 字段     | 类型                                                        | 描述         |
+| -------- | :---------------------------------------------------------- | ------------ |
+| 直接返回 | List<[GroupMemberInfoResp](types.html#groupmemberinforesp)> | 成员信息列表 |
+
 ## 获取群荣誉信息
 
 > bot.getGroupHonorInfo()
+
+**参数**
+
+| 参数    | 类型   | 描述       |
+| ------- | :----- | ---------- |
+| groupId | long   | 群号       |
+| type    | String | 群荣誉类型 |
+
+**返回值**
+
+| 字段             | 类型                                            | 描述                             |
+| ---------------- | :---------------------------------------------- | -------------------------------- |
+| groupId          | long                                            | 群号                             |
+| currentTalkative | [CurrentTalkative](types.html#currenttalkative) | 当前龙王 `talkative` `all`       |
+| talkativeList    | List<[OtherHonor](types.html#otherhonor)>       | 历史龙王 `talkative` `all`       |
+| performerList    | List<[OtherHonor](types.html#otherhonor)>       | 群聊之火 `performer` `all`       |
+| legendList       | List<[OtherHonor](types.html#otherhonor)>       | 群聊炽焰 `legend` `all`          |
+| strongNewbieList | List<[OtherHonor](types.html#otherhonor)>       | 冒尖小春笋 `strong_newbie` `all` |
+| emotionList      | List<[OtherHonor](types.html#otherhonor)>       | 快乐之源 `emotion` `all`         |
+
+::: tip 提示
+`type` 可传入 `talkative` `performer` `legend` `strong_newbie` `emotion` 以分别获取单个类型的群荣誉数据或传入 `all` 获取所有数据
+:::
 
 ## 检查是否可以发送图片
 
@@ -425,89 +474,300 @@
 
 > bot.setGroupAnonymousBan()
 
+**参数**
+
+| 参数      | 类型                              | 描述           |
+| --------- | :-------------------------------- | -------------- |
+| groupId   | long                              | 群号           |
+| anonymous | [Anonymous](types.html#anonymous) | 匿名用户对象   |
+| duration  | String                            | 禁言时长（秒） |
+
+::: tip 提示
+此方法包含一个重载，`anonymous` 参数变为 `flag` 需从群消息上报的数据中获得
+:::
+
 ## 发送合并转发（群）
 
 > bot.sendGroupForwardMsg()
+
+**参数**
+
+| 参数    | 类型                      | 描述                                   |
+| ------- | :------------------------ | -------------------------------------- |
+| groupId | long                      | 群号                                   |
+| msg     | List<Map<String, Object>> | [构建合并转发](advanced.html#合并转发) |
+
+**返回值**
+
+| 字段      | 类型 | 描述    |
+| --------- | :--- | ------- |
+| messageId | int  | 消息 ID |
 
 ## 获取群根目录文件列表
 
 > bot.getGroupRootFiles()
 
+**参数**
+
+| 参数    | 类型 | 描述 |
+| ------- | :--- | ---- |
+| groupId | long | 群号 |
+
+**返回值**
+
+| 字段    | 类型                                | 描述         |
+| ------- | :---------------------------------- | ------------ |
+| files   | List<[Files](types.html#files)>     | 群文件列表   |
+| folders | List<[Folders](types.html#folders)> | 群文件夹列表 |
+
 ## 获取群子目录文件列表
 
 > bot.getGroupFilesByFolder()
+
+**参数**
+
+| 参数     | 类型   | 描述      |
+| -------- | :----- | --------- |
+| groupId  | long   | 群号      |
+| folderId | String | 文件夹 ID |
+
+**返回值**
+
+| 字段    | 类型                                | 描述         |
+| ------- | :---------------------------------- | ------------ |
+| files   | List<[Files](types.html#files)>     | 群文件列表   |
+| folders | List<[Folders](types.html#folders)> | 群文件夹列表 |
 
 ## 获取精华消息列表
 
 > bot.getEssenceMsgList()
 
+**参数**
+
+| 参数    | 类型 | 描述 |
+| ------- | :--- | ---- |
+| groupId | long | 群号 |
+
+**返回值**
+
+| 字段     | 类型                                              | 描述         |
+| -------- | :------------------------------------------------ | ------------ |
+| 直接返回 | List<[EssenceMsgResp](types.html#essencemsgresp)> | 精华消息列表 |
+
 ## 设置精华消息
 
 > bot.setEssenceMsg()
+
+**参数**
+
+| 参数  | 类型 | 描述    |
+| ----- | :--- | ------- |
+| msgId | int  | 消息 ID |
 
 ## 移出精华消息
 
 > bot.deleteEssenceMsg()
 
+**参数**
+
+| 参数  | 类型 | 描述    |
+| ----- | :--- | ------- |
+| msgId | int  | 消息 ID |
+
 ## 设置机器人账号资料
 
 > bot.setBotProfile()
+
+**参数**
+
+| 参数         | 类型   | 描述     |
+| ------------ | :----- | -------- |
+| nickname     | String | 昵称     |
+| company      | String | 公司     |
+| email        | String | 邮箱     |
+| college      | String | 学校     |
+| personalNote | String | 个性签名 |
 
 ## 发送合并转发（私聊）
 
 > bot.sendPrivateForwardMsg()
 
+**参数**
+
+| 参数   | 类型                      | 描述                                   |
+| ------ | :------------------------ | -------------------------------------- |
+| userId | long                      | 目标用户                               |
+| msg    | List<Map<String, Object>> | [构建合并转发](advanced.html#合并转发) |
+
+**返回值**
+
+| 字段      | 类型 | 描述    |
+| --------- | :--- | ------- |
+| messageId | int  | 消息 ID |
+
 ## 发送合并转发
 
 > bot.sendForwardMsg()
+
+**参数**
+
+| 参数  | 类型                      | 描述                                   |
+| ----- | :------------------------ | -------------------------------------- |
+| event | AnyMessageEvent           | 事件                                   |
+| msg   | List<Map<String, Object>> | [构建合并转发](advanced.html#合并转发) |
+
+**返回值**
+
+| 字段      | 类型 | 描述    |
+| --------- | :--- | ------- |
+| messageId | int  | 消息 ID |
 
 ## 获取中文分词
 
 > bot.getWordSlices()
 
+**参数**
+
+| 参数    | 类型   | 描述 |
+| ------- | :----- | ---- |
+| content | String | 内容 |
+
+**返回值**
+
+| 字段   | 类型          | 描述 |
+| ------ | :------------ | ---- |
+| slices | List<String\> | 切片 |
+
 ## 获取当前账号在线客户端列表
 
 > bot.getOnlineClients()
+
+**返回值**
+
+| 字段    | 类型                                | 描述 |
+| ------- | :---------------------------------- | ---- |
+| clients | List<[Clients](types.html#clients)> | 切片 |
 
 ## OCR
 
 > bot.ocrImage()
 
+**参数**
+
+| 参数  | 类型   | 描述 |
+| ----- | :----- | ---- |
+| image | String | 图片 |
+
+**返回值**
+
+| 字段     | 类型                                            | 描述     |
+| -------- | :---------------------------------------------- | -------- |
+| texts    | List<[TextDetection](types.html#textdetection)> | OCR 结果 |
+| language | String                                          | 语言     |
+
 ## 私聊发送文件
 
 > bot.uploadPrivateFile()
+
+**参数**
+
+| 参数   | 类型   | 描述         |
+| ------ | :----- | ------------ |
+| userId | long   | 目标用户     |
+| file   | String | 本地文件路径 |
+| name   | String | 文件名       |
 
 ## 群打卡
 
 > bot.sendGroupSign()
 
+**参数**
+
+| 参数    | 类型 | 描述 |
+| ------- | :--- | ---- |
+| groupId | long | 群号 |
+
 ## 删除单向好友
 
 > bot.deleteUnidirectionalFriend()
+
+**参数**
+
+| 参数   | 类型 | 描述     |
+| ------ | :--- | -------- |
+| userId | long | 目标用户 |
 
 ## 获取单向好友列表
 
 > bot.getUnidirectionalFriendList()
 
+**参数**
+
+| 参数     | 类型                                                                          | 描述     |
+| -------- | :---------------------------------------------------------------------------- | -------- |
+| 直接返回 | List<[UnidirectionalFriendListResp](types.html#UnidirectionalFriendListResp)> | 好友列表 |
+
 ## 获取群文件资源链接
 
 > bot.getGroupFileUrl()
+
+**参数**
+
+| 参数    | 类型   | 描述     |
+| ------- | :----- | -------- |
+| groupId | long   | 群号     |
+| fileId  | String | 文件 ID  |
+| busId   | int    | 文件类型 |
+
+**返回值**
+| 字段 | 类型 | 描述 |
+| ------ | :--- | ---- |
+| url | String | 链接 |
 
 ## 创建群文件文件夹
 
 > bot.createGroupFileFolder()
 
+**参数**
+
+| 参数       | 类型   | 描述       |
+| ---------- | :----- | ---------- |
+| groupId    | long   | 群号       |
+| folderName | String | 文件夹名称 |
+
 ## 删除群文件文件夹
 
 > bot.deleteGroupFileFolder()
+
+**参数**
+
+| 参数       | 类型   | 描述       |
+| ---------- | :----- | ---------- |
+| groupId    | long   | 群号       |
+| folderName | String | 文件夹名称 |
 
 ## 删除群文件
 
 > bot.deleteGroupFile()
 
+**参数**
+
+| 参数    | 类型   | 描述       |
+| ------- | :----- | ---------- |
+| groupId | long   | 群号       |
+| fileId  | String | 文件夹名称 |
+| busid   | int    | 文件类型   |
+
 ## 好友点赞
 
 > bot.sendLike()
+
+**参数**
+
+| 参数   | 类型 | 描述     |
+| ------ | :--- | -------- |
+| userId | long | 目标用户 |
+| times  | int  | 点赞次数 |
 
 ## 获取频道成员列表
 
@@ -532,7 +792,7 @@
 
 | 字段      | 类型                                                | 描述         |
 | --------- | :-------------------------------------------------- | ------------ |
-| members   | List<[GuildMemberInfo](types.html#GuildMemberInfo)> | 成员信息列表 |
+| members   | List<[GuildMemberInfo](types.html#guildmemberinfo)> | 成员信息列表 |
 | finished  | boolean                                             | 是否最终页   |
 | nextToken | String                                              | 翻页 Token   |
 
@@ -582,18 +842,91 @@
 
 > bot.getGuildServiceProfile()
 
+**返回值**
+
+| 字段      | 类型   | 描述     |
+| --------- | :----- | -------- |
+| nickname  | String | 昵称     |
+| tinyId    | String | 自身 ID  |
+| avatarUrl | String | 头像链接 |
+
 ## 获取频道列表
 
 > bot.getGuildList()
+
+**返回值**
+
+| 字段     | 类型                                            | 描述     |
+| -------- | :---------------------------------------------- | -------- |
+| 直接返回 | List<[GuildListResp](types.html#guildlistresp)> | 频道列表 |
 
 ## 通过访客获取频道元数据
 
 > bot.getGuildMetaByGuest()
 
+**参数**
+
+| 参数    | 类型   | 描述    |
+| ------- | :----- | ------- |
+| guildId | String | 频道 ID |
+
+**返回值**
+
+| 字段           | 类型   | 描述               |
+| -------------- | :----- | ------------------ |
+| guildId        | String | 频道 ID            |
+| guildName      | String | 频道名称           |
+| guildProfile   | String | 频道简介           |
+| createTime     | long   | 创建时间           |
+| maxMemberCount | long   | 频道人数上限       |
+| maxRobotCount  | long   | 频道 BOT 数上限    |
+| maxAdminCount  | long   | 频道管理员人数上限 |
+| memberCount    | long   | 已加入人数         |
+| ownerId        | String | 创建者 ID          |
+
 ## 获取子频道列表
 
 > bot.getGuildChannelList()
 
+**参数**
+
+| 参数    | 类型   | 描述         |
+| ------- | :----- | ------------ |
+| guildId | String | 频道 ID      |
+| noCache | String | 是否禁用缓存 |
+
+**返回值**
+
+| 字段            | 类型                                          | 描述                       |
+| --------------- | :-------------------------------------------- | -------------------------- |
+| ownerGuildId    | String                                        | 所属频道 ID                |
+| channelId       | String                                        | 子频道 ID                  |
+| channelType     | int                                           | 子频道类型                 |
+| channelName     | String                                        | 子频道名称                 |
+| createTime      | long                                          | 创建时间                   |
+| creatorTinyId   | String                                        | 创建者 ID                  |
+| talkPermission  | int                                           | 发言权限类型               |
+| visibleType     | int                                           | 可视性类型                 |
+| currentSlowMode | int                                           | 当前启用的慢速模式 Key     |
+| slowModes       | List<[SlowModeInfo](types.html#slowmodeinfo)> | 频道内可用慢速模式类型列表 |
+
 ## 单独获取频道成员信息
 
 > bot.getGuildMemberProfile()
+
+**参数**
+
+| 参数    | 类型   | 描述     |
+| ------- | :----- | -------- |
+| guildId | String | 频道 ID  |
+| userId  | String | 目标用户 |
+
+**返回值**
+
+| 字段      | 类型                                  | 描述             |
+| --------- | :------------------------------------ | ---------------- |
+| tinyId    | String                                | 用户 ID          |
+| nickname  | String                                | 用户昵称         |
+| avatarUrl | String                                | 头像地址         |
+| joinTime  | long                                  | 加入时间         |
+| roles     | List<[RoleInfo](types.html#roleinfo)> | 加入的所有权限组 |
