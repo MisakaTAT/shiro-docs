@@ -114,7 +114,7 @@ public class ExamplePlugin extends BotPlugin {
     public int onPrivateMessage(@NotNull Bot bot, @NotNull PrivateMessageEvent event) {
         event.getArrayMsg()
                 .stream()
-                .filter(item -> MsgTypeEnum.IMAGE == item.getType())
+                .filter(item -> MsgTypeEnum.image == item.getType())
                 .forEach(image -> System.out.println(image.getData().get("url")));
         return MESSAGE_IGNORE;
     }
