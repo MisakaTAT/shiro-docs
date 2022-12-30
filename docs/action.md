@@ -1,5 +1,11 @@
 # 动作
 
+::: tip 提示
+`Bot（动作）` 对象通常随着 `Event（事件）` 分发
+
+如果需要手动获取请参考 [主动发送消息](advanced.html#主动发送消息)
+:::
+
 ## 发送消息
 
 > bot.sendMsg()
@@ -17,6 +23,27 @@
 | 字段      | 类型 | 描述    |
 | --------- | :--- | ------- |
 | messageId | int  | 消息 ID |
+
+## 获取消息
+
+> bot.getMsg()
+
+**参数**
+
+| 参数  | 类型 | 描述    |
+| ----- | :--- | ------- |
+| msgId | int  | 消息 ID |
+
+**返回值**
+
+| 字段       | 类型                        | 描述         |
+| ---------- | :-------------------------- | ------------ |
+| messageId  | int                         | 消息 ID      |
+| realId     | boolean                     | 消息真实 ID  |
+| sender     | [Sender](types.html#Sender) | 发送者信息   |
+| time       | int                         | 发送时间     |
+| message    | String                      | 消息内容     |
+| rawMessage | String                      | 原始消息内容 |
 
 ## 发送私聊消息
 
@@ -36,7 +63,7 @@
 | --------- | :--- | ------- |
 | messageId | int  | 消息 ID |
 
-## 临时会话
+## 发起临时会话
 
 > bot.sendPrivateMsg()
 
@@ -100,23 +127,44 @@
 | finished  | boolean                                             | 是否最终页   |
 | nextToken | String                                              | 翻页 Token   |
 
-## 获取消息
+## 发送信息到子频道
 
-> bot.getMsg()
+> bot.sendGuildMsg()
 
 **参数**
 
-| 参数  | 类型 | 描述    |
-| ----- | :--- | ------- |
-| msgId | int  | 消息 ID |
+| 参数      | 类型   | 描述         |
+| --------- | :----- | ------------ |
+| guildId   | String | 频道 ID      |
+| channelId | String | 子频道 ID    |
+| msg       | String | 要发送的内容 |
 
 **返回值**
 
-| 字段       | 类型                        | 描述         |
-| ---------- | :-------------------------- | ------------ |
-| messageId  | int                         | 消息 ID      |
-| realId     | boolean                     | 消息真实 ID  |
-| sender     | [Sender](types.html#Sender) | 发送者信息   |
-| time       | int                         | 发送时间     |
-| message    | String                      | 消息内容     |
-| rawMessage | String                      | 原始消息内容 |
+| 字段      | 类型   | 描述    |
+| --------- | :----- | ------- |
+| messageId | String | 消息 ID |
+
+## 获取频道消息
+
+> bot.getGuildMsg()
+
+**参数**
+
+| 参数       | 类型   | 描述           |
+| ---------- | :----- | -------------- |
+| guildMsgId | String | 频道消息 ID    |
+| noCache    | String | 是否不使用缓存 |
+
+**返回值**
+
+| 字段          | 类型                                  | 描述       |
+| ------------- | :------------------------------------ | ---------- |
+| guildId       | String                                | 频道 ID    |
+| channelId     | String                                | 子频道 ID  |
+| message       | String                                | 消息内容   |
+| messageId     | String                                | 消息 ID    |
+| messageSeq    | int                                   | 消息序号   |
+| messageSource | String                                | 消息来源   |
+| sender        | [GuildSender](types.html#guildsender) | 发送人信息 |
+| time          | long                                  | 发送时间戳 |

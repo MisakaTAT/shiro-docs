@@ -18,3 +18,11 @@
 | -------- | :----- | ---------- |
 | nickname | String | 发送者昵称 |
 | userId   | long   | 发送者     |
+
+## GuildSender
+
+| 字段     | 类型   | 描述       |
+| -------- | :----- | ---------- |
+| nickname | String | 发送者昵称 |
+| tinyId   | String | 发送者 ID  |
+| userId   | long   | 发送者 ID  |
