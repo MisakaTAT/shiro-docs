@@ -141,7 +141,7 @@ public class ExamplePlugin extends BotPlugin {
   - 获取消息内所有视频链接 `getMsgVideoUrlList()`
   - String 消息上报转消息链 `rawToArrayMsg()`
   - 创建自定义消息合并转发 `generateForwardMsg()`
-  - 从 MsgChainBean 生成 CQ Code `jsonToCode()`
+  - 从 ArrayMsg 生成 CQ Code `jsonToCode()`
   - 消息编码（转义 CQ 码防止文本注入） `escape2()`
   - 获取消息内所有@成员账号（不包含全体@） `getAtList()`
 
