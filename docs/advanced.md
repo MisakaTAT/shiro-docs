@@ -26,7 +26,7 @@
 public class ExamplePlugin {
 
     @GroupMessageHandler(cmd = "开启|关闭")
-    public void test1(@NotNull Bot bot, @NotNull GroupMessageEvent event, @NotNull Matcher matcher) {
+    public void test1(Bot bot, GroupMessageEvent event, Matcher matcher) {
         String action = matcher.group();
         switch (action) {
             case "开启":
@@ -40,7 +40,7 @@ public class ExamplePlugin {
     }
 
     @GroupMessageHandler(cmd = "^战绩查询\s(.*)?$")
-    public void test2(@NotNull Bot bot, @NotNull GroupMessageEvent event, @NotNull Matcher matcher) {
+    public void test2(Bot bot, GroupMessageEvent event, Matcher matcher) {
         String gameID = matcher.group(1);
         queryGameStats(gameID)
     }
@@ -111,7 +111,7 @@ private void sendMsg() {
 public class ExamplePlugin extends BotPlugin {
 
     @Override
-    public int onPrivateMessage(@NotNull Bot bot, @NotNull PrivateMessageEvent event) {
+    public int onPrivateMessage(Bot bot, PrivateMessageEvent event) {
         event.getArrayMsg()
                 .stream()
                 .filter(item -> MsgTypeEnum.image == item.getType())
@@ -221,7 +221,7 @@ public class InterceptorExample implements BotMessageEventInterceptor {
 public class MyCoreEvent extends CoreEvent {
 
     @Override
-    public void online(@NotNull Bot bot) {
+    public void online(Bot bot) {
         // 客户端上线事件
         // 例如上线后发送消息给指定的群或好友
         // 如需获取上线的机器人账号可以调用 bot.getSelfId()
@@ -235,7 +235,7 @@ public class MyCoreEvent extends CoreEvent {
     }
 
     @Override
-    public boolean session(@NotNull WebSocketSession session) {
+    public boolean session(WebSocketSession session) {
         // 可以通过 session.getHandshakeHeaders().getFirst("x-self-id") 获取上线的机器人账号
         // 例如当服务端为开放服务时，并且只有白名单内的账号才允许连接，此时可以检查账号是否存在于白名内
         // 不存在的话返回 false 即可禁止连接
@@ -357,13 +357,13 @@ shiro:
 ```java
 @Order(1)
 @GroupMessageHandler
-public void test1(@NotNull Bot bot, @NotNull GroupMessageEvent event, @NotNull Matcher matcher) {
+public void test1(Bot bot, GroupMessageEvent event, Matcher matcher) {
     System.out.println("我将被第一个触发");
 }
 
 @Order(2)
 @GroupMessageHandler
-public void test2(@NotNull Bot bot, @NotNull GroupMessageEvent event, @NotNull Matcher matcher) {
+public void test2(Bot bot, GroupMessageEvent event, Matcher matcher) {
     System.out.println("我将被第二个触发");
 }
 ```
