@@ -5,12 +5,12 @@
 ::: tip 提示
 
 - 本文档默认您了解并熟悉 `Java/Kotlin` 基本语法以及 `SpringBoot` 开发体系
-- QQ 群：860346522
+- QQ 群：`860346522`
   :::
 
 ::: warning 注意
 
-- 开发环境仅支持 `JDK 1.8` 及以上版本
+- `v2` 版本开始仅支持 `JDK 17+` 与 `SpringBoot 3.0.0+`
 - 客户端需要支持 `websocket reverse` 即反向 `websocket` 连接
 - 支持 `Onebot V11` 标准及 `go-cqhttp` 拓展
   :::

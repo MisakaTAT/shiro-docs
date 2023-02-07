@@ -313,7 +313,7 @@ shiro:
     # 访问密钥，强烈推荐在公网的服务器设置
     access-token: ""
     # 超时回收，默认10秒
-    do-request-timeout: 100000
+    timeout: 10
     # 二进制消息的最大长度
     max-binary-message-buffer-size: 512000
     # 最大空闲时间，超过这个时间将关闭会话
@@ -327,10 +327,9 @@ shiro:
     # 补充速率（每秒补充的令牌数量）
     rate: 1
     # 令牌桶容量
-    capacity:
-      1
-      # 如果该值为 false 时，当令牌获取失败则会直接丢次本次请求
-      # 如果该值为 true 时，当令牌获取失败则会阻塞当前线程，后续任务将被添加到等待队列
+    capacity: 1
+    # 如果该值为 false 时，当令牌获取失败则会直接丢次本次请求
+    # 如果该值为 true 时，当令牌获取失败则会阻塞当前线程，后续任务将被添加到等待队列
     awaitTask: true
     # 等待超时
     timeout: 10
