@@ -69,6 +69,11 @@ public int onGroupUploadNotice(Bot bot, GroupUploadNoticeEvent event) {
     // do something···
     return MESSAGE_IGNORE;
 }
+
+@GroupUploadNoticeHandler
+public void example(Bot bot, GroupUploadNoticeEvent event){
+    // do something···
+}
 ```
 
 ## 管理员变动
@@ -80,7 +85,7 @@ public int onGroupAdminNotice(Bot bot, GroupAdminNoticeEvent event) {
 }
 
 @GroupAdminHandler
-public void example(Bot bot, GroupAdminNoticeEvent event, Matcher matcher){
+public void example(Bot bot, GroupAdminNoticeEvent event){
     // do something···
 }
 ```
@@ -94,7 +99,7 @@ public int onGroupDecreaseNotice(Bot bot, GroupDecreaseNoticeEvent event) {
 }
 
 @GroupDecreaseHandler
-public void example(Bot bot, GroupDecreaseNoticeEvent event, Matcher matcher){
+public void example(Bot bot, GroupDecreaseNoticeEvent event){
     // do something···
 }
 ```
@@ -108,7 +113,7 @@ public int onGroupIncreaseNotice(Bot bot, GroupIncreaseNoticeEvent event) {
 }
 
 @GroupIncreaseHandler
-public void example(Bot bot, GroupIncreaseNoticeEvent event, Matcher matcher){
+public void example(Bot bot, GroupIncreaseNoticeEvent event){
     // do something···
 }
 ```
@@ -119,6 +124,11 @@ public void example(Bot bot, GroupIncreaseNoticeEvent event, Matcher matcher){
 public int onGroupBanNotice(Bot bot, GroupBanNoticeEvent event) {
     // do something···
     return MESSAGE_IGNORE;
+}
+
+@GroupBanNoticeHandler
+public void example(Bot bot, GroupBanNoticeEvent event){
+    // do something···
 }
 ```
 
@@ -131,7 +141,7 @@ public int onFriendAddNotice(Bot bot, FriendAddNoticeEvent event) {
 }
 
 @FriendAddNoticeHandler
-public void example(Bot bot, FriendAddNoticeEvent event, Matcher matcher){
+public void example(Bot bot, FriendAddNoticeEvent event){
     // do something···
 }
 ```
@@ -145,7 +155,7 @@ public int onGroupMsgDeleteNotice(Bot bot, GroupMsgDeleteNoticeEvent event) {
 }
 
 @GroupMsgDeleteNoticeHandler
-public void example(Bot bot, GroupMsgDeleteNoticeEvent event, Matcher matcher){
+public void example(Bot bot, GroupMsgDeleteNoticeEvent event){
     // do something···
 }
 ```
@@ -159,7 +169,7 @@ public int onPrivateMsgDeleteNotice(Bot bot, PrivateMsgDeleteNoticeEvent event) 
 }
 
 @PrivateMsgDeleteNoticeHandler
-public void example(Bot bot, PrivateMsgDeleteNoticeEvent event, Matcher matcher){
+public void example(Bot bot, PrivateMsgDeleteNoticeEvent event){
     // do something···
 }
 ```
@@ -171,6 +181,11 @@ public int onGroupPokeNotice(Bot bot, PokeNoticeEvent event) {
     // do something···
     return MESSAGE_IGNORE;
 }
+
+@GroupPokeNoticeHandler
+public void example(Bot bot, PokeNoticeEvent event){
+    // do something···
+}
 ```
 
 ## 私聊戳一戳事件
@@ -179,6 +194,11 @@ public int onGroupPokeNotice(Bot bot, PokeNoticeEvent event) {
 public int onPrivatePokeNotice(Bot bot, PokeNoticeEvent event) {
     // do something···
     return MESSAGE_IGNORE;
+}
+
+@PrivatePokeNoticeHandler
+public void example(Bot bot, PokeNoticeEvent event){
+    // do something···
 }
 ```
 
@@ -207,6 +227,11 @@ public int onGroupCardChangeNotice(Bot bot, GroupCardChangeNotice event) {
     // do something···
     return MESSAGE_IGNORE;
 }
+
+@GroupCardChangeNoticeHandler
+public void example(Bot bot, GroupCardChangeNotice event){
+    // do something···
+}
 ```
 
 ## 收到离线文件
@@ -225,6 +250,11 @@ public int onFriendAddRequest(Bot bot, FriendAddRequestEvent event) {
     // do something···
     return MESSAGE_IGNORE;
 }
+
+@FriendAddRequestHandler
+public void example(Bot bot, FriendAddRequestEvent event){
+    // do something···
+}
 ```
 
 ## 加群请求
@@ -233,6 +263,11 @@ public int onFriendAddRequest(Bot bot, FriendAddRequestEvent event) {
 public int onGroupAddRequest(Bot bot, GroupAddRequestEvent event) {
     // do something···
     return MESSAGE_IGNORE;
+}
+
+@GroupAddRequestHandler
+public void example(Bot bot, GroupAddRequestEvent event){
+    // do something···
 }
 ```
 

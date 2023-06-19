@@ -7,12 +7,6 @@ export default {
   base: "/shiro-docs/",
 
   themeConfig: {
-    algolia: {
-      appId: "X3KZS61WIZ",
-      apiKey: "de397420c51f5bba13f3976820e656b6",
-      indexName: "shiro-docs",
-    },
-
     nav: [
       { text: "Guide", link: "/" },
       { text: "Action", link: "/action.md" },
@@ -37,7 +31,7 @@ export default {
 
     footer: {
       message: "以 MIT 许可协议发布",
-      copyright: "版权所有 © 2022 MisakaTAT",
+      copyright: "版权所有 © 2023 MisakaTAT",
     },
   },
 };
