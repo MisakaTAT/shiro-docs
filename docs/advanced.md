@@ -25,7 +25,8 @@
 @Component
 public class ExamplePlugin {
 
-    @GroupMessageHandler(cmd = "开启|关闭")
+    @GroupMessageHandler
+    @MessageHandlerFilter(cmd = "开启|关闭")
     public void test1(Bot bot, GroupMessageEvent event, Matcher matcher) {
         String action = matcher.group();
         switch (action) {
@@ -39,7 +40,8 @@ public class ExamplePlugin {
         }
     }
 
-    @GroupMessageHandler(cmd = "^战绩查询\s(.*)?$")
+    @GroupMessageHandler
+    @MessageHandlerFilter(cmd = "^战绩查询\s(.*)?$")
     public void test2(Bot bot, GroupMessageEvent event, Matcher matcher) {
         String gameID = matcher.group(1);
         queryGameStats(gameID)
@@ -366,3 +368,21 @@ public void test2(Bot bot, GroupMessageEvent event, Matcher matcher) {
     System.out.println("我将被第二个触发");
 }
 ```
+
+
+## 消息过滤器
+
+::: warning 注意
+`@MessageHandlerFilter` 注解仅在 `Shiro v2.1.0` 及以上版本提供
+:::
+
+- **現在公開可能な情報（已支持的参数列表）**
+  - 触发命令（支持正则） `cmd`
+  - 检查是否被@ `at`
+  - 检查是否包含回复 `reply`
+  - 消息中是否包含某一类型 `types`
+  - 按群组过滤消息 `groups`
+  - 按发送者过滤消息 `senders`
+  - 前缀触发 `startWith`
+  - 后缀触发 `endWith`
+  - 反转过滤器 `invert`
