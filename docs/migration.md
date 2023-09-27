@@ -44,7 +44,7 @@ event.getArrayMsg()
 
 ### MessageHandler
 
-> `MessageHandler` 注解变更为 `AnyMessageHandler`
+> `@MessageHandler` 注解变更为 `@AnyMessageHandler`
 
 ```java
 // v1
@@ -55,5 +55,22 @@ public void fun(Bot bot, AnyMessageEvent event) {}
 ```java
 // v2
 @AnyMessageHandler
+public void fun(Bot bot, AnyMessageEvent event) {}
+```
+
+## v2.0.9 ➡️ v2.1.0
+
+> `新增 @MessageHandlerFilter 注解`
+
+```java
+// v2.0.9
+@AnyMessageHandler(cmd = "say hello")
+public void fun(Bot bot, AnyMessageEvent event) {}
+```
+
+```java
+// v2.1.0
+@AnyMessageHandler
+@MessageHandlerFilter(cmd = "say hello")
 public void fun(Bot bot, AnyMessageEvent event) {}
 ```
