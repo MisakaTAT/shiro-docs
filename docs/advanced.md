@@ -309,19 +309,26 @@ shiro:
   # 拦截器
   interceptor: com.mikuac.example.interceptor.InterceptorExample
   # WebSocket 配置
-  ws-config:
-    # 反向 Websocket 连接地址，无需该配置字段可删除，将使用默认值 "/ws/shiro"
-    ws-url: "/ws/shiro"
+  ws:
     # 访问密钥，强烈推荐在公网的服务器设置
     access-token: ""
     # 超时回收，默认10秒
     timeout: 10
-    # 二进制消息的最大长度
-    max-binary-message-buffer-size: 512000
-    # 最大空闲时间，超过这个时间将关闭会话
-    max-session-idle-timeout: 900000
-    # 最大文本消息缓冲区
-    max-text-message-buffer-size: 512000
+    client:
+      # 是否启用
+      enable: false
+      url: "ws://websocket_server:port"
+    server:
+      # 是否启用
+      enable: true
+       # 反向 Websocket 连接地址，无需该配置字段可删除，将使用默认值 "/ws/shiro"
+      url: "/ws/shiro"
+      # 二进制消息的最大长度
+      max-binary-message-buffer-size: 512000
+      # 最大空闲时间，超过这个时间将关闭会话
+      max-session-idle-timeout: 900000
+      # 最大文本消息缓冲区
+      max-text-message-buffer-size: 512000
   # 限速器（令牌桶算法）
   limiter:
     # 是否启用限速器

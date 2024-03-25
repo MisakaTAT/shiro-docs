@@ -53,7 +53,7 @@ implementation("com.mikuac:shiro:latest")
 implementation 'com.mikuac:shiro:latest'
 ```
 
-## 服务端配置
+## 连接配置
 
 `SpringBoot` 项目默认的配置文件路径应为 `resources/application.prorperties`，推荐变更为 `yaml` 格式的配置文件，以提供一个较为良好的编写与阅读体验
 
@@ -64,15 +64,30 @@ implementation 'com.mikuac:shiro:latest'
 :::
 
 ```yaml
+# 该配置为反向连接示例
 server:
-  # SpringBoot 项目的运行端口即为客户端反向 Websocket 连接端口
   port: 5555
+
+shiro:
+  ws:
+    server:
+      enable: true
+      url: "/ws/shiro"
 ```
 
-## 客户端配置
+```yaml
+# 该配置为正向连接示例
+shiro:
+  ws:
+    client:
+        enable: true
+        url: "ws://websocket_server:port"
+```
+
+## 实例端配置
 
 ::: tip 提示
-客户端配置文件使用 `go-cqhttp` 为例，配置反向 `websocket` 连接服务端
+实例端配置文件使用 `go-cqhttp` 为例，配置反向 `websocket` 连接服务端
 :::
 
 ```yaml
