@@ -74,3 +74,29 @@ public void fun(Bot bot, AnyMessageEvent event) {}
 @MessageHandlerFilter(cmd = "say hello")
 public void fun(Bot bot, AnyMessageEvent event) {}
 ```
+
+## v2.1.8 ➡️ v2.2.0
+
+> `新增正向 WebSocket 连接支持`
+
+```yml
+// v2.1.8
+# 该配置为反向连接示例
+shiro:
+  ws-config:
+    ws-url: "/ws/shiro"
+```
+
+```yml
+// v2.2.0
+shiro:
+  ws:
+    # 该配置为正向连接示例
+    client:
+      enable: false
+      url: "ws://your-domain:port"
+    # 该配置为反向连接示例
+    server:
+      enable: false
+      url: "/ws/shiro"
+```
