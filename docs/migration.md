@@ -60,7 +60,7 @@ public void fun(Bot bot, AnyMessageEvent event) {}
 
 ## v2.0.9 ➡️ v2.1.0
 
-> `新增 @MessageHandlerFilter 注解`
+> 新增 `@MessageHandlerFilter` 注解
 
 ```java
 // v2.0.9
@@ -77,9 +77,11 @@ public void fun(Bot bot, AnyMessageEvent event) {}
 
 ## v2.1.8 ➡️ v2.2.0
 
-> `新增正向 WebSocket 连接支持`
+>在版本 `v2.1.9` 正向 `WebSocket` 连接模式下存在 `Session` 被异常关闭导致的消息发送失败的问题
 
-```yml
+> 新增正向 `WebSocket` 连接支持
+
+```yaml
 // v2.1.8
 # 该配置为反向连接示例
 shiro:
@@ -87,7 +89,7 @@ shiro:
     ws-url: "/ws/shiro"
 ```
 
-```yml
+```yaml
 // v2.2.0
 shiro:
   ws:
