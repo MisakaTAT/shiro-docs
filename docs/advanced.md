@@ -284,7 +284,7 @@ val friend = 12345678L;
 // 获取 Endpoint
 val action = CustomActionPath.DELETE_FRIEND;
 // 构建请求参数
-val params = new JSONObject() {{
+Map<String, Object> params = new HashMap<>() {{
     put("friend_id", friend);
 }};
 // 参考 Bot 类对响应结果进行处理
