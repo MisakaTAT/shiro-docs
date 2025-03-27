@@ -14,6 +14,7 @@ export default {
       { text: "Advanced", link: "/advanced.md" },
       { text: "Types", link: "/types.md" },
       { text: "Migration", link: "/migration.md" },
+      { text: "Communtiy", link: "/communtiy.md" },
     ],
 
     editLink: {
