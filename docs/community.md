@@ -45,3 +45,9 @@
 - 仓库：https://github.com/KingPrimes/NyxBot
 - 作者：KingPrimes
 - 描述：warframe status bot
+
+### AetherBot
+
+- 仓库：https://github.com/BingZi-233/AetherBot
+- 作者：BingZi-233
+- 描述：AetherBot 是一个基于 Spring Boot 和 OpenAI 构建的智能 QQ 机器人，使用 Shiro 框架进行消息处理，提供 AI 聊天和智能助手功能。
