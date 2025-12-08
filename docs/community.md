@@ -38,6 +38,12 @@
 - 作者：sa-yi
 - 描述：一个基于 Shiro 框架的趣味插件，每天为你随机分配一位"老婆"，支持抽卡、更换和查看列表功能。
 
+### AnalysisBilibiliPlugin
+
+- 仓库：https://github.com/FlanChanXwO/shiro-analysis-bilibili-plugin
+- 作者：FlanChanXwO
+- 描述：AnalysisBilibiliPlugin 是一个基于 Spring Boot 3 和 Shiro 针对 B 站内容的插件，支持视频、动态、专栏和直播分析。
+
 ## 项目
 
 ### NYXBot
